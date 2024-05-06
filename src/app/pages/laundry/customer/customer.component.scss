@@ -1,0 +1,46 @@
+.right-top {
+	display: flex;
+	justify-content: end;
+}
+
+.right-top select,
+.search {
+	border-radius: 20px;
+	margin-right: 20px;
+	padding: 7px 10px;
+}
+
+.right-top a:hover,
+.pagination button:hover,
+.active-button {
+	background-color: #11408b !important;
+}
+
+.pagination {
+	display: flex;
+	justify-content: end;
+	margin-top: 10px;
+}
+
+.pagination button {
+	color: white;
+	border: none;
+	padding: 10px;
+	margin-left: 5px;
+	border-radius: 7px;
+	background-color: #2f73e0;
+}
+
+@media screen and (max-width: 599px) {
+	.right-top {
+		margin-top: 10px;
+		display: block;
+	}
+
+	.right-top a,
+	.right-top select,
+	.search {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}

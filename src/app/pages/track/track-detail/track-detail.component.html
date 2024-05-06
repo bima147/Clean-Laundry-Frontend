@@ -1,0 +1,137 @@
+<div
+	class="blank-layout-container justify-content-center align-items-center bg-light-primary"
+>
+	<div
+		class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+	>
+		<div class="col-lg-6 d-flex align-items-center">
+			<mat-card class="cardWithShadow boxed-auth">
+				<mat-card-content class="p-32">
+					<div class="text-center">
+						<h1>
+							<a href="/">Clean <span>Laundry</span></a>
+						</h1>
+					</div>
+
+					<!-- <div class="row m-t-24 custom-row">
+            <div class="col-12 col-sm-6">
+              <button mat-stroked-button class="w-100">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="/assets/images/svgs/google-icon.svg"
+                    alt="google"
+                    width="16"
+                    class="m-r-8"
+                  />
+                  Sign in with Google
+                </div>
+              </button>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button
+                mat-stroked-button
+                class="w-100 d-flex align-items-center"
+              >
+                <div class="d-flex align-items-center">
+                  <img
+                    src="/assets/images/svgs/facebook-icon.svg"
+                    alt="facebook"
+                    width="40"
+                    class="m-r-4"
+                  />
+                  Sign in with FB
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="or-border m-t-30">or sign in with</div> -->
+					<mat-label
+						class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+						style="margin-top: 30px"
+						>Nomer Transaksi Laundry</mat-label
+					>
+					<div class="input-custom">
+						<input
+							id="uuid"
+							type="text"
+							placeholder="Nomer Transaksi Laundry"
+							style="padding: 1rem"
+							[(ngModel)]="uuid"
+							required
+						/>
+					</div>
+
+					<button
+						mat-flat-button
+						color="primary"
+						class="w-100"
+						(click)="onTrack()"
+					>
+						Search
+					</button>
+
+					<mat-card-title style="margin-top: 20px"
+						>Tracking Laundry</mat-card-title
+					>
+
+					<div class="timeline m-t-24">
+						<div
+							class="timeline-item d-flex overflow-hidden"
+							*ngFor="
+								let data of transaksi.progress;
+								let i = index
+							"
+						>
+							<div class="time text-right mat-subtitle-1 f-s-14">
+								{{ convertDateTime(data.createdAt) }}
+							</div>
+							<div class="point d-flex align-items-center">
+								<span
+									*ngIf="i === 0"
+									class="timeline-badge border-primary m-y-8"
+								></span>
+								<span
+									*ngIf="i !== 0"
+									class="timeline-badge border-accent m-y-8"
+								></span>
+								<span class="timline-border d-block"></span>
+							</div>
+							<div class="desc">
+								<ng-template [ngIf]="data.progress">
+									<span
+										class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block"
+										>{{ data.progress }}</span
+									>
+								</ng-template>
+								<ng-template [ngIf]="data.note">
+									<span class="mat-subtitle-1 f-s-14 lh-20">{{
+										data.note
+									}}</span>
+								</ng-template>
+							</div>
+						</div>
+						<div class="timeline-item d-flex overflow-hidden">
+							<div
+								class="time text-right mat-subtitle-1 f-s-14"
+							></div>
+							<div class="point d-flex align-items-center"></div>
+							<div class="desc">
+								<ng-template>
+									<span
+										class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block"
+									></span>
+								</ng-template>
+								<ng-template>
+									<span
+										class="mat-subtitle-1 f-s-14 lh-20 d-block"
+									></span>
+								</ng-template>
+							</div>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,101 @@
+<mat-card class="cardWithShadow">
+	<mat-card-content class="p-24">
+		<mat-card-title>
+			<div class="row">
+				<div class="col-12 col-sm-4">List Transaksi</div>
+				<div class="col-12 col-sm-8 right-top">
+					<select
+						[(ngModel)]="limit"
+						(ngModelChange)="onChangeLimit($event)"
+					>
+						<option
+							*ngFor="let limits of filterLimit"
+							[value]="limits.value"
+						>
+							{{ limits.label }}
+						</option>
+					</select>
+					<select
+						[(ngModel)]="filterBy"
+						(ngModelChange)="onSelectChange($event)"
+					>
+						<option
+							*ngFor="let filter of filterArray"
+							[value]="filter.value"
+						>
+							{{ filter.label }}
+						</option>
+					</select>
+					<input
+						class="search"
+						type="text"
+						(keyup.enter)="onSearch()"
+						[(ngModel)]="search"
+						placeholder="Search..."
+					/>
+					<a
+						*ngIf="userService.getLevel() === 'Management'"
+						[routerLink]="['new']"
+						mat-flat-button
+						color="primary"
+						style="float: right"
+					>
+						Tambah Transaksi
+					</a>
+				</div>
+			</div>
+		</mat-card-title>
+		<div class="table-responsive m-t-16">
+			<div class="overflow-x-auto">
+				<table class="table table-hover w-100">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nomer Transaksi</th>
+							<th scope="col">Tanggal Transaksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngIf="listTransaksi.length === 0">
+							<td class="text-center" colspan="6">
+								Data tidak ditemukan!
+							</td>
+						</tr>
+						<tr *ngFor="let item of listTransaksi; index as i">
+							<th scope="row">{{ i + 1 }}</th>
+							<td class="text-center">
+								{{ item.transactionUUID }}
+							</td>
+							<td class="text-center">
+								{{
+									item.createdAt | date : "dd-MM-yyyy hh:mm a"
+								}}
+							</td>
+							<td>
+								<a
+									[routerLink]="[
+										'detail/' + item.transactionUUID
+									]"
+									mat-flat-button
+									color="primary"
+									[ngClass]="['btn-detail']"
+								>
+									Lihat Detail
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="pagination">
+			<button
+				*ngFor="let current of pages"
+				(click)="goToPage(current - 1)"
+				[ngClass]="{ 'active-button': page + 1 === current }"
+			>
+				{{ current }}
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

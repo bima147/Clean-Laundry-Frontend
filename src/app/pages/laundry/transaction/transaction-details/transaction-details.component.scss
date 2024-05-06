@@ -1,0 +1,38 @@
+.icon-top {
+	color: #2f73e0;
+}
+
+a {
+	color: #2f73e0;
+}
+
+a:hover {
+	color: #11408b;
+}
+
+.icon-top:hover {
+	color: #11408b;
+}
+
+.card-add {
+	margin-bottom: 0px;
+}
+
+.card-add .col-12 {
+	display: flex;
+	flex-direction: column;
+}
+
+.card-add label {
+	margin: 10px 0px;
+}
+
+.card-add input {
+	padding: 10px 5px;
+	border-radius: 7px;
+	border: 1px solid #d5d5d5;
+}
+
+.text-danger {
+	color: red;
+}

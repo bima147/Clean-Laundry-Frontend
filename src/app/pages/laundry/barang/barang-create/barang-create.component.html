@@ -1,0 +1,79 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px"
+			>Tambah Barang</mat-card-title
+		>
+		<div class="d-flex flex-column card-add">
+			<label class="form-label">Nama Barang</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama barang"
+				[(ngModel)]="barang.nama"
+				required
+				nama
+				#nama="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorNama">
+				<small class="text-danger">{{ errorNama }}</small>
+			</div>
+			<label class="form-label">Satuan Barang</label>
+			<input
+				type="text"
+				placeholder="Masukkan satuan barang"
+				[(ngModel)]="barang.satuan"
+				required
+				satuan
+				#satuan="ngModel"
+			/>
+			<div
+				class="text-danger d-flex flex-column mb-3"
+				*ngIf="errorSatuan"
+			>
+				<small class="text-danger">{{ errorSatuan }}</small>
+			</div>
+			<label class="form-label">Harga Barang</label>
+			<input
+				type="text"
+				placeholder="Masukkan harga barang"
+				[(ngModel)]="barang.harga"
+				required
+				harga
+				#harga="ngModel"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorHarga">
+				<small class="text-danger">{{ errorHarga }}</small>
+			</div>
+			<label class="form-label">Estimasi selesai</label>
+			<input
+				type="text"
+				placeholder="Masukkan lama estimasi barang dicuci"
+				[(ngModel)]="barang.estimasi"
+				required
+				estimasi
+				#estimasi="ngModel"
+			/>
+			<div
+				class="text-danger d-flex flex-column mb-3"
+				*ngIf="errorEstimasi"
+			>
+				<small class="text-danger">{{ errorEstimasi }}</small>
+			</div>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				(click)="onAdd()"
+				[disabled]="btnLoading"
+				style="margin: 20px 0px"
+			>
+				Tambah Barang
+				<i *ngIf="loadingIndicator" class="pi pi-spin pi-spinner"></i>
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,164 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px"
+			>Tambah Barang</mat-card-title
+		>
+		<!-- Add formGroup directive to wrap the form controls -->
+		<div class="d-flex flex-column card-add">
+			<label for="form-label">Konsumen</label>
+			<input
+				type="text"
+				readonly
+				class="findCustomer"
+				*ngIf="customerData"
+				[(ngModel)]="customerNama"
+			/>
+			<input
+				class="findCustomer"
+				type="text"
+				placeholder="Masukkan nomer telepon konsumen"
+				(keyup.enter)="onFindCustomer()"
+				[(ngModel)]="nomorCustomer"
+				*ngIf="!customerData"
+			/>
+			<form
+				[formGroup]="orderForm"
+				(ngSubmit)="onCreate()"
+				#crisisForm="ngForm"
+			>
+				<label class="form-label">Nama Barang</label>
+				<div class="table-responsive m-t-16">
+					<div class="overflow-x-auto">
+						<table class="table table-hover w-100">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Nama</th>
+									<th scope="col">Satuan</th>
+									<th scope="col">Harga</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Subtotal</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="
+										let item of getItemsForm().controls;
+										let indexItem = index
+									"
+									[formGroupName]="indexItem"
+								>
+									<td class="text-center">
+										{{ indexItem + 1 }}
+									</td>
+									<td class="text-center">
+										{{ getItemForm(indexItem).nama }}
+									</td>
+									<td class="text-center">
+										{{ getItemForm(indexItem).satuan }}
+									</td>
+									<td class="text-center">
+										{{
+											getItemForm(indexItem).harga
+												| currency
+													: "IDR"
+													: "symbol-narrow"
+										}}
+									</td>
+									<td class="text-center">
+										<input
+											type="number"
+											class="form-control"
+											formControlName="qty"
+											(input)="
+												updateQtyForm($event, indexItem)
+											"
+										/>
+									</td>
+									<td class="text-center">
+										{{
+											getItemForm(indexItem).subtotal
+												| currency
+													: "IDR"
+													: "symbol-narrow"
+										}}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input
+											type="text"
+											class="form-control"
+											[(ngModel)]="nomorBarang"
+											(keydown.enter)="
+												onFindBarang($event)
+											"
+											[ngModelOptions]="{
+												standalone: true
+											}"
+										/>
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">Total</td>
+									<td>
+										{{
+											orderForm.get("total")?.value
+												| currency
+													: "IDR"
+													: "symbol-narrow"
+										}}
+									</td>
+								</tr>
+								<tr>
+									<td colspan="6">Dibayar</td>
+									<td>
+										<input
+											type="number"
+											class="form-control"
+											formControlName="dibayar"
+											[(ngModel)]="paid"
+											(input)="updateCount()"
+										/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="6">Kembalian</td>
+									<td>
+										<input
+											readonly
+											type="number"
+											class="form-control"
+											[value]="return"
+										/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</form>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				style="margin: 20px 0px"
+				(click)="onCreate()"
+			>
+				Tambah Barang
+			</button>
+		</div>
+		<!-- End of form -->
+	</mat-card-content>
+</mat-card>

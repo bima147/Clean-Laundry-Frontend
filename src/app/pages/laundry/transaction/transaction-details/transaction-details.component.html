@@ -1,0 +1,147 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title
+			style="margin-right: 20px; display: flex; flex-direction: row"
+			><a [routerLink]="['/transaction']"
+				><mat-icon class="d-flex align-items-center"
+					><i-tabler
+						name="arrow-left"
+						class="icon-18 d-flex"
+						[ngClass]="['icon-top']"
+					></i-tabler></mat-icon></a
+			>Detail Transaksi</mat-card-title
+		>
+		<div class="row card-add">
+			<div class="col-12 col-sm-6 col-md-4">
+				<label class="form-label">Nomer Transaksi</label>
+				<input type="text" [(ngModel)]="uuid" [readOnly]="true" />
+			</div>
+
+			<div class="col-12 col-sm-6 col-md-4">
+				<label class="form-label">Nama Pelanggan</label>
+				<input
+					type="text"
+					[(ngModel)]="transaksi.customer"
+					[readOnly]="true"
+				/>
+			</div>
+
+			<div class="col-12 col-sm-6 col-md-4">
+				<label class="form-label">Total</label>
+				<input
+					type="text"
+					[(ngModel)]="transaksi.total"
+					[readOnly]="true"
+				/>
+			</div>
+		</div>
+		<h3>Detail Barang</h3>
+		<div class="table-responsive m-t-16">
+			<div class="overflow-x-auto">
+				<table class="table table-hover w-100">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nama Barang</th>
+							<th scope="col">Jumlah</th>
+							<th scope="col">Subtotal</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of transaksi.barang; index as i">
+							<th scope="row">{{ i + 1 }}</th>
+							<td class="text-center">
+								{{ item.barangID.nama }}
+							</td>
+							<td class="text-center">
+								{{ item.count }}
+							</td>
+							<td class="text-center">
+								{{ item.subtotal }}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<h3>
+			Tracking Data
+			<a
+				*ngIf="userService.getLevel() === 'Management'"
+				routerLink="/transaction/{{ uuid }}/progress/new"
+			>
+				<i-tabler
+					class="routeIcon"
+					name="plus"
+					matListItemIcon
+				></i-tabler>
+			</a>
+		</h3>
+		<div class="timeline m-t-24">
+			<div
+				class="timeline-item d-flex overflow-hidden"
+				*ngFor="let data of transaksi.progress; let i = index"
+			>
+				<div class="time text-right mat-subtitle-1 f-s-14">
+					{{ convertDateTime(data.createdAt) }}
+				</div>
+				<div class="point d-flex align-items-center">
+					<span
+						*ngIf="i === 0"
+						class="timeline-badge border-primary m-y-8"
+					></span>
+					<span
+						*ngIf="i !== 0"
+						class="timeline-badge border-accent m-y-8"
+					></span>
+					<span class="timline-border d-block"></span>
+				</div>
+				<div class="desc">
+					<ng-template [ngIf]="data.progress">
+						<span
+							class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block"
+							>{{ data.progress }}
+							<a
+								*ngIf="userService.getLevel() === 'Management'"
+								routerLink="/transaction/{{
+									uuid
+								}}/progress/detail/{{
+									data.transactionDetailID
+								}}"
+							>
+								<i-tabler
+									class="routeIcon"
+									name="pencil"
+									matListItemIcon
+								></i-tabler> </a
+						></span>
+					</ng-template>
+					<ng-template [ngIf]="data.note">
+						<span class="mat-subtitle-1 f-s-14 lh-20">{{
+							data.note
+						}}</span>
+					</ng-template>
+				</div>
+			</div>
+			<div class="timeline-item d-flex overflow-hidden">
+				<div class="time text-right mat-subtitle-1 f-s-14"></div>
+				<div class="point d-flex align-items-center"></div>
+				<div class="desc">
+					<ng-template>
+						<span
+							class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block"
+						></span>
+					</ng-template>
+					<ng-template>
+						<span
+							class="mat-subtitle-1 f-s-14 lh-20 d-block"
+						></span>
+					</ng-template>
+				</div>
+			</div>
+		</div>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,52 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px"
+			>Tambah Progress untuk No. Transaksi {{ uuid }}</mat-card-title
+		>
+		<div class="d-flex flex-column card-add">
+			<label class="form-label">Progress</label>
+			<select
+				[(ngModel)]="progress.progress"
+				(ngModelChange)="onSelectChange($event)"
+			>
+				<option
+					*ngFor="let filter of progressArray"
+					[value]="filter.value"
+				>
+					{{ filter.label }}
+				</option>
+			</select>
+			<!-- <div
+				class="text-danger d-flex flex-column mb-3"
+				*ngIf="errorService"
+			>
+				<small class="text-danger">{{ errorService }}</small>
+			</div> -->
+			<label class="form-label">Note</label>
+			<input
+				type="text"
+				placeholder="Masukkan note tambahan untuk detail progress"
+				[(ngModel)]="progress.note"
+				required
+				doAction
+				#doAction="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				(click)="onAdd()"
+				[disabled]="btnLoading"
+				style="margin: 20px 0px"
+			>
+				Tambah Progress
+				<i *ngIf="loadingIndicator" class="pi pi-spin pi-spinner"></i>
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

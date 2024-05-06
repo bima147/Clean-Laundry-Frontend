@@ -1,0 +1,61 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px"
+			>Tambah Pelanggan</mat-card-title
+		>
+		<div class="d-flex flex-column card-add">
+			<label class="form-label">Nama Pelanggan</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama pelanggan"
+				[(ngModel)]="customer.namaLengkap"
+				required
+				namaLengkap
+				#namaLengkap="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorNama">
+				<small class="text-danger">{{ errorNama }}</small>
+			</div>
+			<label class="form-label">Nomer Telepon</label>
+			<input
+				type="text"
+				placeholder="Masukkan nomer telepon pelanggan"
+				[(ngModel)]="customer.noHp"
+				required
+				noHp
+				#noHp="ngModel"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorPhone">
+				<small class="text-danger">{{ errorPhone }}</small>
+			</div>
+			<label class="form-label">Email Pelanggan</label>
+			<input
+				type="text"
+				placeholder="Masukkan email pelanggan"
+				[(ngModel)]="customer.email"
+				required
+				email
+				#email="ngModel"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorEmail">
+				<small class="text-danger">{{ errorEmail }}</small>
+			</div>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				(click)="onAdd()"
+				[disabled]="btnLoading"
+				style="margin: 20px 0px"
+			>
+				Tambah Pelanggan
+				<i *ngIf="loadingIndicator" class="pi pi-spin pi-spinner"></i>
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

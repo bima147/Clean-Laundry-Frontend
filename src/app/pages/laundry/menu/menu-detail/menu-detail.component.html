@@ -1,0 +1,140 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px">Tambah Menu</mat-card-title>
+		<div class="d-flex flex-column card-add">
+			<label class="form-label">Nama Service Menu</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama service menu"
+				[(ngModel)]="menu.menuNameService"
+				required
+				menuService
+				#menuService="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div
+				class="text-danger d-flex flex-column mb-3"
+				*ngIf="errorService"
+			>
+				<small class="text-danger">{{ errorService }}</small>
+			</div>
+			<label class="form-label">Action Menu</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama menu"
+				[(ngModel)]="menu.doAction"
+				required
+				doAction
+				#doAction="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div
+				class="text-danger d-flex flex-column mb-3"
+				*ngIf="errorAction"
+			>
+				<small class="text-danger">{{ errorAction }}</small>
+			</div>
+			<label class="form-label">Nama Menu</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama menu"
+				[(ngModel)]="menu.menuName"
+				required
+				menuName
+				#menuName="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorNama">
+				<small class="text-danger">{{ errorNama }}</small>
+			</div>
+			<label class="form-label">Link Menu</label>
+			<input
+				type="text"
+				placeholder="Masukkan link menu"
+				[(ngModel)]="menu.menuLink"
+				required
+				menuLink
+				#menuLink="ngModel"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorLink">
+				<small class="text-danger">{{ errorLink }}</small>
+			</div>
+			<label class="form-label">Ikon Menu</label>
+			<small class="small-label mb-3"
+				>Untuk referensi ikon, dapat dilihat
+				<a href="https://tabler.io/icons" target="_blank"
+					>disini</a
+				></small
+			>
+			<input
+				type="text"
+				placeholder="contoh: category"
+				[(ngModel)]="menu.menuIcon"
+				required
+				menuIcon
+				#menuIcon="ngModel"
+			/>
+			<small class="mb-3">Ikon yang akan muncul: </small>
+			<i-tabler
+				class="routeIcon"
+				name="{{ menu.menuIcon }}"
+				matListItemIcon
+			></i-tabler>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorIcon">
+				<small class="text-danger">{{ errorIcon }}</small>
+			</div>
+			<label class="form-label">Apakah dimasukan ke sidebar menu?</label>
+			<div class="radio-show">
+				<div class="form-check">
+					<input
+						[(ngModel)]="menu.show"
+						required
+						show
+						#show="ngModel"
+						class="form-check-input"
+						type="radio"
+						name="show"
+						id="showTrue"
+						value="true"
+					/>
+					<label class="form-check-label" for="showTrue">
+						Tampilkan
+					</label>
+				</div>
+				<div class="form-check">
+					<input
+						[(ngModel)]="menu.show"
+						class="form-check-input"
+						type="radio"
+						name="show"
+						id="showFalse"
+						value="false"
+					/>
+					<label class="form-check-label" for="showFalse">
+						Tidak
+					</label>
+				</div>
+			</div>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorShow">
+				<small class="text-danger">{{ errorShow }}</small>
+			</div>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				(click)="onUpdate()"
+				[disabled]="btnLoading"
+				style="margin: 20px 0px"
+			>
+				Tambah Menu
+				<i *ngIf="loadingIndicator" class="pi pi-spin pi-spinner"></i>
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

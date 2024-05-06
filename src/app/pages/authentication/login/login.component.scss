@@ -1,0 +1,29 @@
+.input-custom > input {
+	width: 100%;
+	margin-bottom: 16px;
+	border-radius: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.87);
+}
+
+.input-custom > input:focus {
+	outline: 1px solid var(--mdc-theme-primary, #0085db);
+}
+
+h1 a {
+	text-decoration: none;
+	color: #2f73e0;
+}
+
+h1 a span {
+	color: #11408b;
+}
+
+.footer-login {
+	margin-top: 30px !important;
+	text-align: center;
+}
+
+.footer-login a {
+	text-decoration: none;
+	color: #2f73e0;
+}

@@ -1,0 +1,94 @@
+<mat-card class="cardWithShadow">
+	<mat-card-content class="p-24">
+		<mat-card-title>
+			<div class="row">
+				<div class="col-12 col-sm-4">List Menu</div>
+				<div class="col-12 col-sm-8 right-top">
+					<select
+						[(ngModel)]="limit"
+						(ngModelChange)="onChangeLimit($event)"
+					>
+						<option
+							*ngFor="let limits of filterLimit"
+							[value]="limits.value"
+						>
+							{{ limits.label }}
+						</option>
+					</select>
+					<input
+						class="search"
+						type="text"
+						(keyup.enter)="onSearch()"
+						[(ngModel)]="search"
+						placeholder="Search by name..."
+					/>
+					<a
+						[routerLink]="['new']"
+						mat-flat-button
+						color="primary"
+						style="float: right"
+					>
+						Tambah Menu
+					</a>
+				</div>
+			</div>
+		</mat-card-title>
+		<div class="table-responsive m-t-16">
+			<div class="overflow-x-auto">
+				<table class="table table-hover w-100">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nama menu</th>
+							<th scope="col">Link menu</th>
+							<th scope="col">Menu Icon</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of listMenu; index as i">
+							<th scope="row">{{ i + 1 }}</th>
+							<td class="text-center">{{ item.menuName }}</td>
+							<td class="text-center">{{ item.menuLink }}</td>
+							<td class="text-center">
+								<i-tabler
+									class="routeIcon"
+									name="{{ item.menuIcon }}"
+									matListItemIcon
+								></i-tabler>
+							</td>
+							<td>
+								<a
+									[routerLink]="['detail/' + item.menuID]"
+									mat-flat-button
+									color="primary"
+									[ngClass]="['btn-detail']"
+								>
+									Lihat Detail
+								</a>
+								<button
+									(click)="
+										onDelete(item.menuID, item.menuName)
+									"
+									mat-flat-button
+									color="error"
+									[ngClass]="['btn-delete']"
+								>
+									Hapus
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="pagination">
+			<button
+				*ngFor="let current of pages"
+				(click)="goToPage(current - 1)"
+				[ngClass]="{ 'active-button': page + 1 === current }"
+			>
+				{{ current }}
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

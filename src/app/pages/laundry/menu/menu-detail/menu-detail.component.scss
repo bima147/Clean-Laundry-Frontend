@@ -1,0 +1,41 @@
+.card-add {
+	margin-bottom: 0px;
+}
+
+.card-add label {
+	margin: 10px 0px;
+}
+
+.small-label {
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+.small-label a,
+.small-label a::after {
+	text-decoration: none;
+	color: #2f73e0;
+}
+
+.small-label:focus {
+	color: #11408b;
+}
+
+.card-add input {
+	padding: 10px 5px;
+	border-radius: 7px;
+	border: 1px solid #d5d5d5;
+}
+
+.text-danger {
+	color: red;
+}
+
+.radio-show {
+	display: flex;
+	margin: 10px 0;
+}
+
+.radio-show div {
+	margin-right: 20px;
+}

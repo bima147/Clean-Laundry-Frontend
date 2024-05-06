@@ -1,0 +1,55 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<mat-card class="cardWithShadow">
+	<mat-card-content>
+		<mat-card-title style="margin-bottom: 20px"
+			>Tambah Group Menu</mat-card-title
+		>
+		<div class="d-flex flex-column card-add">
+			<label class="form-label">Nama Group Menu</label>
+			<input
+				type="text"
+				placeholder="Masukkan nama service menu"
+				[(ngModel)]="groupMenu.groupName"
+				required
+				groupName
+				#groupName="ngModel"
+				maxlength="30"
+				minlength="1"
+			/>
+			<div class="text-danger d-flex flex-column mb-3" *ngIf="errorNama">
+				<small class="text-danger">{{ errorNama }}</small>
+			</div>
+			<label class="form-label">Menu</label>
+			<div class="menu" *ngFor="let item of listMenu; index as i">
+				<div class="form-check form-check-inline">
+					<input
+						class="form-check-input"
+						type="checkbox"
+						id="{{ item.menuService }}{{ item.doAction }}"
+						value="{{ item.menuID }}"
+						(change)="addListMenu(item)"
+						[checked]="compare(item) === true"
+					/>
+					<label
+						class="form-check-label"
+						for="{{ item.menuService }}{{ item.doAction }}"
+						>{{ item.menuName }}</label
+					>
+				</div>
+			</div>
+			<button
+				mat-flat-button
+				color="primary"
+				class="w-100"
+				(click)="onUpdate()"
+				[disabled]="btnLoading"
+				style="margin: 20px 0px"
+			>
+				Tambah Menu
+				<i *ngIf="loadingIndicator" class="pi pi-spin pi-spinner"></i>
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>
